@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace：必须与对应的接口全类名一致 id:必须与对应接口的某个对应的方法名一致 -->
+<mapper namespace="com.tgb.mapper.UserMapper">
+	<resultMap id="BaseResultMap" type="com.tgb.model.User">
+		<id column="id" property="id" jdbcType="VARCHAR" />
+		<result column="userName" property="username" jdbcType="VARCHAR" />
+		<result column="password" property="password" jdbcType="VARCHAR" />
+		<result column="name" property="name" jdbcType="VARCHAR" />
+		<result column="nickname" property="nickname" jdbcType="VARCHAR" />
+		<result column="sex" property="sex" jdbcType="VARCHAR" />
+		<result column="picture" property="picture" jdbcType="VARCHAR" />
+		<result column="createtime" property="createtime" jdbcType="VARCHAR" />
+		<result column="lastlogintime" property="lastlogintime" jdbcType="VARCHAR" />
+		<result column="tilepath" property="tilepath" jdbcType="VARCHAR" />
+		<result column="age" property="age" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<sql id="Base_Column_List">
+		id, userName, password, name, nickname, sex, picture, createtime,
+		lastlogintime,
+		tilepath, age
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
+		select
+		<include refid="Base_Column_List" />
+		from user
+		where id = #{id,jdbcType=VARCHAR}
+	</select>
+	<insert id="save" parameterType="User">
+		insert into user(userName,
+		password, name, nickname, sex, picture, createtime, lastlogintime,
+		tilepath, age)
+		values(userName#{userName}, password#{password},
+		name#{name}, nickname#{nickname}, sex#{sex}, picture#{picture},
+		createtime#{createtime}, lastlogintime#{lastlogintime},
+		tilepath#{tilepath},
+		age#{age})
+	</insert>
+
+	<update id="update" parameterType="User">
+		update user set
+		userName=#{userName},age=#{age} where id=#{id}
+	</update>
+
+	<delete id="delete" parameterType="int">
+		delete from user where
+		id=#{id}
+	</delete>
+
+	<!-- mybsits_config中配置的alias类别名,也可直接配置resultType为类路劲 -->
+	<select id="findById" parameterType="int" resultType="User">
+		select 
+		<include refid="Base_Column_List" />
+		from user where id=#{id}
+	</select>
+
+	<select id="findAll" resultType="User">
+		select
+		<include refid="Base_Column_List" />
+		from user
+	</select>
+
+</mapper>
