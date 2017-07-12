@@ -57,9 +57,7 @@
 	</select>
 
 	<select id="findAll" resultType="User">
-		select
-		<include refid="Base_Column_List" />
-		from user
+		select * from user
 	</select>
 
 </mapper>
