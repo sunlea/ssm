@@ -131,9 +131,7 @@ public class UserController {
 	 * @return
 	 */
 	@RequestMapping("/updateUser")
-	public String updateUser(User user,HttpServletRequest request){
-		
-		
+	/*public String updateUser(User user,HttpServletRequest request){//返回页面
 		if(userService.update(user)){
 			user = userService.findById(user.getId());
 			request.setAttribute("user", user);
@@ -141,6 +139,19 @@ public class UserController {
 		}else{
 			return "/error";
 		}
+	}*/
+	@ResponseBody
+	public MsgHander updateUser(User user, HttpServletRequest request) {//返回json
+		MsgHander msg = new MsgHander();
+		msg.setStatus(MsgHander.CONTROLLER_CODE_SUCCESS);
+		if(userService.update(user)){
+			user = userService.findById(user.getId());
+			request.setAttribute("user", user);
+			msg.setStatus(MsgHander.CONTROLLER_CODE_SUCCESS);
+		}else{
+			msg.setStatus(MsgHander.CONTROLLER_CODE_ERROR);
+		}
+		return msg;
 	}
 	
 	/**
