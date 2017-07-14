@@ -18,34 +18,26 @@
 	</resultMap>
 
 	<sql id="Base_Column_List">
-		id, userName, password, name, nickname, sex, picture, createtime,
-		lastlogintime,
-		tilepath, age
+		id, userName, password, name, nickname, sex, picture, createtime, lastlogintime, tilepath, age
 	</sql>
 	<select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
 		select
 		<include refid="Base_Column_List" />
-		from user
+		from users
 		where id = #{id,jdbcType=VARCHAR}
 	</select>
 	<insert id="save" parameterType="User">
-		insert into user(userName,
-		password, name, nickname, sex, picture, createtime, lastlogintime,
-		tilepath, age)
-		values(userName#{userName}, password#{password},
-		name#{name}, nickname#{nickname}, sex#{sex}, picture#{picture},
-		createtime#{createtime}, lastlogintime#{lastlogintime},
-		tilepath#{tilepath},
-		age#{age})
+		insert into users(userName, password, name, nickname, sex, picture, createtime, lastlogintime, tilepath, age)
+		values(#{userName}, #{password}, #{name}, #{nickname}, #{sex}, #{picture}, #{createtime}, #{lastlogintime}, #{tilepath}, #{age})
 	</insert>
 
 	<update id="update" parameterType="User">
-		update user set
+		update users set
 		userName=#{userName},age=#{age},nickname=#{nickname},sex=#{sex} where id=#{id}
 	</update>
 
 	<delete id="delete" parameterType="int">
-		delete from user where
+		delete from users where
 		id=#{id}
 	</delete>
 
@@ -53,11 +45,11 @@
 	<select id="findById" parameterType="int" resultType="User">
 		select 
 		<include refid="Base_Column_List" />
-		from user where id=#{id}
+		from users where id=#{id}
 	</select>
 
 	<select id="findAll" resultType="User">
-		select * from user
+		select * from users
 	</select>
 
 </mapper>
