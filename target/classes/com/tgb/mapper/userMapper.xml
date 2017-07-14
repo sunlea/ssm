@@ -41,7 +41,7 @@
 
 	<update id="update" parameterType="User">
 		update user set
-		userName=#{userName},age=#{age} where id=#{id}
+		userName=#{userName},age=#{age},nickname=#{nickname},sex=#{sex} where id=#{id}
 	</update>
 
 	<delete id="delete" parameterType="int">
